@@ -37,6 +37,39 @@ const text = StyleSheet.create({
         color: colors.white,
         marginLeft: 50,
     },
+    secondaryText: {
+        fontWeight: '700',
+        fontSize: 14,
+        marginVertical: 10,
+        textTransform: 'uppercase',
+        textAlign: 'center',
+        color: colors.white,
+    },
+
+    titleText: {
+        fontWeight: '700',
+        fontSize: 16,
+        marginVertical: 5,
+        textTransform: 'uppercase',
+        color: colors.white,
+        textAlign:'left',
+    },
+
+    subtitleText: {
+        fontWeight: '400',
+        fontSize: 12,
+        marginVertical: 5,
+        textTransform: 'uppercase',
+        color: colors.lightGray,
+        textAlign:'left',
+    },
+
+    yearText: {
+        fontWeight: '700',
+        fontSize: 14,
+        color: colors.primary,
+        textAlign: 'left',
+    },
 })
 
 const theme = StyleSheet.create({
@@ -45,18 +78,18 @@ const theme = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+        backgroundColor: colors.mediumGray,
     },
     card:{
         width: "100%",
         height: "100%",
-        backgroundColor: colors.mediumGray,
         padding: 20,
         alignItems: 'center',
         justifyContent: 'space-around',
     },
     draw: {
-        width: "100%",
-        height: "40%",
+        width: 360,
+        height: 200,
     },
     arrow:{
         width: "40%",
@@ -73,6 +106,14 @@ const theme = StyleSheet.create({
         alignItems: 'center',
         borderRadius: 10,
         backgroundColor: colors.primary,
+    },
+    secondaryButton: {
+        width: 320,
+        height: 40,
+        alignItems: 'center',
+        borderRadius: 10,
+        backgroundColor: colors.secondary,
+        borderColor: colors.white,
     },
     arrowContainer: {
         width: 48,
@@ -99,7 +140,25 @@ const theme = StyleSheet.create({
         paddingHorizontal: 15,
         backgroundColor: colors.white,
         borderRadius: 10,
-    }
+    },
+    secondaryInput:{
+        width: 320,
+        height: 40,
+        marginVertical: 16,
+        paddingHorizontal: 15,
+        backgroundColor: colors.white,
+        borderRadius: 10,
+    },
+    moviecard: {
+        width: 360,
+        height: 360,
+        marginVertical: 20,
+        paddingTop: 20,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: colors.secondary,
+        borderRadius: 10,
+    },
 });
 
 export {colors, theme, text};
