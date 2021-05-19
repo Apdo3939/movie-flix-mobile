@@ -1,20 +1,25 @@
 import * as React from 'react';
-import { View, Image, Text, TouchableOpacity } from 'react-native';
+import { View, Image, Text, TouchableOpacity, ImageSourcePropType } from 'react-native';
 import { useNavigation } from '@react-navigation/native'
 import { theme, text } from '../styles';
-import movieImg from '../assets/exemplo.png';
 
-const MovieCard: React.FC = () => {
+interface MovieProps {
+    id: Number;
+    imgUrl: ImageSourcePropType;
+    title: String;
+    subTitle: String;
+    year: Number;
+}
+
+const MovieCard: React.FC<MovieProps> = ({ id, imgUrl, title, year, subTitle }) => {
     const navigation = useNavigation();
     return (
         <View style={theme.moviecard}>
-            <Image source={movieImg} style={theme.draw} />
+            <Image source={imgUrl} style={theme.draw} />
             <View style={theme.textContainer}>
-                <Text style={text.titleText}>007 sem tempo para morrer</Text>
-                <Text style={text.yearText}>2021</Text>
-                <Text style={text.subtitleText}>
-                    Mais um filme do 007 estreçado por daniel craig.
-                </Text>
+                <Text style={text.titleText}>{title}</Text>
+                <Text style={text.yearText}>{year}</Text>
+                <Text style={text.subtitleText}>{subTitle}</Text>
             </View>
             <TouchableOpacity
                 style={theme.secondaryButton}

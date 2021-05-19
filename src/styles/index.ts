@@ -1,4 +1,6 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
+
+const deviceWidth = Dimensions.get('window').width;
 
 const colors = {
     white: '#FFFFFF',
@@ -52,7 +54,7 @@ const text = StyleSheet.create({
         marginVertical: 5,
         textTransform: 'uppercase',
         color: colors.white,
-        textAlign:'left',
+        textAlign: 'left',
     },
 
     subtitleText: {
@@ -61,7 +63,7 @@ const text = StyleSheet.create({
         marginVertical: 5,
         textTransform: 'uppercase',
         color: colors.lightGray,
-        textAlign:'left',
+        textAlign: 'left',
     },
 
     yearText: {
@@ -80,7 +82,7 @@ const theme = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: colors.mediumGray,
     },
-    card:{
+    card: {
         width: "100%",
         height: "100%",
         padding: 20,
@@ -91,7 +93,7 @@ const theme = StyleSheet.create({
         width: 360,
         height: 200,
     },
-    arrow:{
+    arrow: {
         width: "40%",
         height: "40%",
     },
@@ -125,7 +127,7 @@ const theme = StyleSheet.create({
         justifyContent: 'center',
     },
 
-    primaryInputContent:{
+    primaryInputContent: {
         width: "100%",
         height: "100%",
         backgroundColor: colors.mediumGray,
@@ -133,7 +135,7 @@ const theme = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-evenly',
     },
-    primaryInput:{
+    primaryInput: {
         width: 320,
         height: 40,
         marginVertical: 16,
@@ -141,7 +143,7 @@ const theme = StyleSheet.create({
         backgroundColor: colors.white,
         borderRadius: 10,
     },
-    secondaryInput:{
+    secondaryInput: {
         width: 320,
         height: 40,
         marginVertical: 16,
@@ -161,4 +163,48 @@ const theme = StyleSheet.create({
     },
 });
 
-export {colors, theme, text};
+const nav = StyleSheet.create(
+    {
+        leftText: {
+            fontSize:26,
+            color: colors.white,
+            fontWeight: 'bold',
+            marginLeft: 50,
+        },
+
+        rightMenuContainer: {
+            marginRight: 50,
+        },
+
+        option: {
+            paddingVertical: 5,
+        },
+
+        options: {
+            width: deviceWidth,
+            height: 120,
+            marginTop: 125,
+            marginRight: -50,
+            backgroundColor: colors.primary,
+            paddingVertical: 20,
+            paddingLeft: 50,
+            
+        },
+
+        menuImg: {
+            width: 15,
+            height: 15,
+        },
+
+        textOption: {
+            color: colors.white,
+            textTransform: 'uppercase',
+        },
+
+        textActive: {
+            fontWeight: 'bold',
+        },
+    }
+);
+
+export { colors, theme, text, nav };
