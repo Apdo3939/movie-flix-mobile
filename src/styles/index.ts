@@ -166,7 +166,7 @@ const theme = StyleSheet.create({
 const nav = StyleSheet.create(
     {
         leftText: {
-            fontSize:26,
+            fontSize: 26,
             color: colors.white,
             fontWeight: 'bold',
             marginLeft: 50,
@@ -188,7 +188,7 @@ const nav = StyleSheet.create(
             backgroundColor: colors.primary,
             paddingVertical: 20,
             paddingLeft: 50,
-            
+
         },
 
         menuImg: {
@@ -204,7 +204,93 @@ const nav = StyleSheet.create(
         textActive: {
             fontWeight: 'bold',
         },
+
+        buttonSair: {
+            width: "100%",
+            height: 30,
+            marginRight: 50,
+            borderRadius: 10,
+            borderWidth: 2,
+            borderColor: colors.white,
+            color: colors.white,
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: colors.primary,
+
+        },
     }
 );
 
-export { colors, theme, text, nav };
+const login = StyleSheet.create({
+
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: colors.secondary,
+        padding: 20,
+    },
+    card: {
+        width: "100%",
+        height: "100%",
+        padding: 20,
+        alignItems: 'center',
+        borderRadius: 20,
+        shadowColor: colors.primary,
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+    },
+
+    title: {
+
+        fontSize: 30,
+        fontWeight: '500',
+        color: colors.primary,
+        marginTop: 50,
+    },
+
+    form: {
+        width: "100%",
+        paddingVertical: 40,
+        paddingHorizontal: 20,
+        marginVertical: 20,
+        borderRadius: 20,
+    },
+
+    inputUser: {
+        width: "100%",
+        height: 40,
+        borderRadius: 10,
+        marginVertical: 20,
+        paddingLeft: 20,
+        color: colors.secondary,
+        backgroundColor: colors.white,
+        borderWidth: 2,
+        borderColor: colors.white,
+    },
+
+    primaryButton: {
+        width: "100%",
+        height: 40,
+        borderRadius: 10,
+        marginVertical: 50,
+        borderWidth: 2,
+        borderColor: colors.darkGray,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: colors.primary,
+    },
+
+    textButton: {
+        fontSize: 24,
+        fontWeight: '500',
+        color: colors.white,
+    },
+
+})
+
+export { colors, theme, text, nav, login };

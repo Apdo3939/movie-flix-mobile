@@ -1,12 +1,14 @@
 import { useNavigation, useRoute } from '@react-navigation/core';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { TouchableOpacity, Image, View, Text } from 'react-native';
 import { nav } from '../styles';
 import menu from '../assets/menu.png';
+import { doLogout, isAuthenticated } from '../@services/auth';
 
 const NavBar = () => {
 
     const [show, setShow] = useState(false);
+    const [authenticated, setAuthenticated] = useState(false);
     const navigation = useNavigation();
     const route = useRoute();
 
@@ -18,33 +20,55 @@ const NavBar = () => {
         setShow(false);
     }
 
+    function logout() {
+        doLogout();
+        navigation.navigate('Login');
+    }
+
+    async function logged() {
+        const result = await isAuthenticated();
+        result ? setAuthenticated(true) : setAuthenticated(false);
+    }
+
+    useEffect(() => {
+        logged();
+    }, [])
+
     return (
-        <TouchableOpacity
-            style={nav.rightMenuContainer}
-            onPress={() => setShow(!show)}
-        >
-            <Image source={menu} style={nav.menuImg} />
-            {show ? (
-                <View style={nav.options}>
-                    <TouchableOpacity
-                        style={nav.option}
-                        onPress={() => navigate('MovieFlix')}
-                    >
-                        <Text style={[nav.textOption, route.name === 'MovieFlix' ? nav.textActive : null]}>Home</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={nav.option}
-                        onPress={() => navigate('Login')}
-                    >
-                        <Text style={[nav.textOption, route.name === 'Login' ? nav.textActive : null]}>Login</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={nav.option}
-                        onPress={() => navigate('Login')}
-                    >
-                        <Text style={[nav.textOption, route.name === 'ADM' ? nav.textActive : null]}>Adm</Text>
-                    </TouchableOpacity>
-                </View>
-            ) : null}
-        </TouchableOpacity>
+        <>{authenticated ? (
+            <TouchableOpacity 
+            onPress={()=> logout()}
+            style={nav.buttonSair}>
+                <Text style={nav.textOption}>Sair</Text>
+            </TouchableOpacity>) : (
+            <TouchableOpacity
+                style={nav.rightMenuContainer}
+                onPress={() => setShow(!show)}
+            >
+                <Image source={menu} style={nav.menuImg} />
+                {show ? (
+                    <View style={nav.options}>
+                        <TouchableOpacity
+                            style={nav.option}
+                            onPress={() => navigate('MovieFlix')}
+                        >
+                            <Text style={[nav.textOption, route.name === 'MovieFlix' ? nav.textActive : null]}>Home</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={nav.option}
+                            onPress={() => navigate('Login')}
+                        >
+                            <Text style={[nav.textOption, route.name === 'Login' ? nav.textActive : null]}>Login</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={nav.option}
+                            onPress={() => navigate('Login')}
+                        >
+                            <Text style={[nav.textOption, route.name === 'ADM' ? nav.textActive : null]}>Adm</Text>
+                        </TouchableOpacity>
+                    </View>
+                ) : null}
+            </TouchableOpacity>
+            )}
+        </>
     );
 }
 

@@ -1,40 +1,60 @@
-import * as React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
-import { theme, text } from '../styles';
-import arrow from '../assets/arrow.png';
+import { login } from '../styles';
 import { useNavigation } from '@react-navigation/core';
+import { isAuthenticated, loginUser } from '../@services/auth';
 
 const Login: React.FC = () => {
+
     const navigation = useNavigation();
+    const [userFetchData, setUserFetchData] = useState({});
+    const [userInfo, setUserInfo] = useState({
+        username: '',
+        password: '',
+    });
+    const newUserInfo = { ...userInfo }
+
+    async function handleLogin() {
+        const data = await loginUser(userInfo);
+        setUserFetchData(data);
+        navigation.navigate('Dashboard');
+    }
+    
     return (
-        <View style={theme.container}>
-            <View style={theme.primaryInputContent}>
-                <View style={theme.textContainer}>
-                    <Text style={text.bold}>
-                        LOGIN
-                    </Text>
-                </View>
-                <View>
+        <View style={login.container}>
+            <View style={login.card}>
+                <Text style={login.title}>Login</Text>
+                <View style={login.form}>
                     <TextInput
-                        style={theme.primaryInput}
-                        placeholder="E-mail"
+                        placeholder='Email'
+                        autoCapitalize='none'
+                        keyboardType='email-address'
+                        value={userInfo.username}
+                        onChangeText={(e) => {
+                            newUserInfo.username = e;
+                            setUserInfo(newUserInfo)
+                        }}
+                        style={login.inputUser}
                     />
                     <TextInput
-                        style={theme.primaryInput}
-                        placeholder="Password"
+                        placeholder='Password'
+                        autoCapitalize='none'
+                        secureTextEntry={true}
+                        value={userInfo.password}
+                        onChangeText={(e) => {
+                            newUserInfo.password = e;
+                            setUserInfo(newUserInfo)
+                        }}
+                        style={login.inputUser}
                     />
+                    <TouchableOpacity
+                        style={login.primaryButton}
+                        activeOpacity={0.8}
+                        onPress={() => handleLogin()}
+                    >
+                        <Text style={login.textButton}>Login</Text>
+                    </TouchableOpacity>
                 </View>
-                <TouchableOpacity
-                    style={theme.primaryButton}
-                    activeOpacity={0.6}
-                    onPress={() => navigation.navigate('Genre')}>
-                    <Text style={text.primaryText}>
-                        FAZER LOGIN
-                        </Text>
-                    <View style={theme.arrowContainer}>
-                        <Image source={arrow} style={theme.arrow} />
-                    </View>
-                </TouchableOpacity>
             </View>
         </View>
     );
