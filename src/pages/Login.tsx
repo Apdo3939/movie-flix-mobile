@@ -17,7 +17,7 @@ const Login: React.FC = () => {
     async function handleLogin() {
         const data = await loginUser(userInfo);
         setUserFetchData(data);
-        navigation.navigate('Dashboard');
+        navigation.navigate('MovieCatalog');
     }
     
     return (

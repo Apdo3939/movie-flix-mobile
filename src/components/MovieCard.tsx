@@ -15,7 +15,7 @@ const MovieCard: React.FC<MovieProps> = ({ id, imgUrl, title, year, subTitle }) 
     const navigation = useNavigation();
     return (
         <View style={theme.moviecard}>
-            <Image source={imgUrl} style={theme.draw} />
+            <Image source={imgUrl} style={theme.drawProducts} />
             <View style={theme.textContainer}>
                 <Text style={text.titleText}>{title}</Text>
                 <Text style={text.yearText}>{year}</Text>

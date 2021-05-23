@@ -1,21 +1,44 @@
-import * as React from 'react';
-import { ScrollView, ActivityIndicator } from 'react-native';
-import { theme } from '../styles';
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
+import { ScrollView, ActivityIndicator, View } from 'react-native';
+import { catalogTheme } from '../styles';
 import { MovieCard } from '../components';
-import { api } from '../@services';
+import { getMovies } from '../@services';
+
+type FilterForm = {
+    genreId?: number;
+};
+
+type Props = {
+    onSearch: (filter: FilterForm) => void;
+};
 
 const MovieCatalog: React.FC = () => {
 
-    const [movies, setMovies] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [search, setSearch] = useState("");
+    const [movies, setMovies] = useState([]);
+    const [showGenres, setShowGenres] = useState(false);
+    const [selectedGenre, setSelectedGenre] = useState(0);
 
-    const url = `/movies?page=0`;
+    const [movie, setMovie] = useState({
+        id: null,
+        title: null,
+        subTitle: null,
+        year: null,
+        imgUrl: null,
+        synopsis: null,
+        genre: null,
+    });
+
+    const [genres, setGenres] = useState([
+        {
+            id: null,
+            name: null,
+        },
+    ]);
 
     async function fillMovies() {
         setLoading(true);
-        const res = await api.get(url);
+        const res = await getMovies();
         setMovies(res.data.content);
         setLoading(false);
     }
@@ -24,15 +47,18 @@ const MovieCatalog: React.FC = () => {
         fillMovies();
     }, []);
 
+    
 
     return (
-
-        <ScrollView contentContainerStyle={theme.container}>
-            {loading ? (<ActivityIndicator size='large' />) : (
-                movies.map(movie => (<MovieCard {...movie} key={movie.id}/>))
-            )}
+        <ScrollView contentContainerStyle={catalogTheme.container} >
+            <View style={catalogTheme.card}>
+                <View style={catalogTheme.cardDetails}>
+                    {loading ? (<ActivityIndicator size='large' />) : (
+                        movies.map(movie => <MovieCard {...movie} key={movie.id} />)
+                    )}
+                </View>
+            </View>
         </ScrollView>
-
     );
 }
 

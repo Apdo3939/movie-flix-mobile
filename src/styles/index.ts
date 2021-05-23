@@ -1,6 +1,7 @@
 import { StyleSheet, Dimensions } from 'react-native';
 
 const deviceWidth = Dimensions.get('window').width;
+const deviceHeigth = Dimensions.get('window').height;
 
 const colors = {
     white: '#FFFFFF',
@@ -93,9 +94,13 @@ const theme = StyleSheet.create({
         width: 360,
         height: 200,
     },
+    drawProducts: {
+        width: 320,
+        height: 160,
+    },
     arrow: {
-        width: "40%",
-        height: "40%",
+        width: 15,
+        height: 15,
     },
     textContainer: {
         paddingHorizontal: 20,
@@ -152,14 +157,21 @@ const theme = StyleSheet.create({
         borderRadius: 10,
     },
     moviecard: {
-        width: 360,
-        height: 360,
-        marginVertical: 20,
-        paddingTop: 20,
-        alignItems: 'center',
-        justifyContent: 'center',
+        width: 320,
+        height: 280,
         backgroundColor: colors.secondary,
         borderRadius: 10,
+        paddingTop: 10,
+        marginVertical: 10,
+        alignItems: 'flex-start',
+        justifyContent: 'space-around',
+        shadowColor: colors.white,
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84, 
     },
 });
 
@@ -293,4 +305,76 @@ const login = StyleSheet.create({
 
 })
 
-export { colors, theme, text, nav, login };
+const catalogTheme = StyleSheet.create({
+    container: {
+        flex: 1,
+        padding: 20,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: colors.secondary,
+    },
+
+    card: {
+        width: '100%',
+        height: '100%',
+        borderRadius: 20,
+        padding: 10,
+        alignItems: 'center',
+        shadowColor: colors.primary,
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+    },
+
+    cardDetails: {
+        padding:10,   
+    },
+})
+
+const details = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: colors.secondary,
+        padding: 20,
+    },
+    card: {
+        width: "100%",
+        height: "100%",
+        padding: 20,
+        borderRadius: 20,
+        shadowColor: colors.primary,
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+    },
+
+    textButton: {
+
+        fontSize: 20,
+        fontWeight: '400',
+        color: colors.lightGray,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+
+    primaryButton: {
+        width: "100%",
+        height: 50,
+        borderRadius: 10,
+        borderWidth: 2,
+        borderColor: colors.lightGray,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: colors.secondary,
+    },
+})
+
+export { colors, theme, text, nav, login, details, catalogTheme };

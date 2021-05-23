@@ -36,9 +36,9 @@ const NavBar = () => {
 
     return (
         <>{authenticated ? (
-            <TouchableOpacity 
-            onPress={()=> logout()}
-            style={nav.buttonSair}>
+            <TouchableOpacity
+                onPress={() => logout()}
+                style={nav.buttonSair}>
                 <Text style={nav.textOption}>Sair</Text>
             </TouchableOpacity>) : (
             <TouchableOpacity
@@ -67,7 +67,7 @@ const NavBar = () => {
                     </View>
                 ) : null}
             </TouchableOpacity>
-            )}
+        )}
         </>
     );
 }
