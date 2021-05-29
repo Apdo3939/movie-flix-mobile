@@ -332,6 +332,12 @@ const catalogTheme = StyleSheet.create({
     cardDetails: {
         padding:10,   
     },
+
+    cardModal: {
+        width: '100%',
+        height: 60,
+        borderRadius: 10,
+    },
 })
 
 const details = StyleSheet.create({

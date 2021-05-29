@@ -1,6 +1,7 @@
 import { useNavigation, useRoute } from '@react-navigation/core';
 import React, { useState, useEffect } from 'react';
 import { TouchableOpacity, Image, View, Text } from 'react-native';
+import {TouchableNativeFeedback} from 'react-native-gesture-handler';
 import { nav } from '../styles';
 import menu from '../assets/menu.png';
 import { doLogout, isAuthenticated } from '../@services/auth';
@@ -48,22 +49,17 @@ const NavBar = () => {
                 <Image source={menu} style={nav.menuImg} />
                 {show ? (
                     <View style={nav.options}>
-                        <TouchableOpacity
+                        <TouchableNativeFeedback
                             style={nav.option}
                             onPress={() => navigate('MovieFlix')}
                         >
                             <Text style={[nav.textOption, route.name === 'MovieFlix' ? nav.textActive : null]}>Home</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={nav.option}
-                            onPress={() => navigate('Login')}
-                        >
-                            <Text style={[nav.textOption, route.name === 'Login' ? nav.textActive : null]}>Login</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={nav.option}
+                        </TouchableNativeFeedback>
+                        <TouchableNativeFeedback style={nav.option}
                             onPress={() => navigate('Login')}
                         >
                             <Text style={[nav.textOption, route.name === 'ADM' ? nav.textActive : null]}>Adm</Text>
-                        </TouchableOpacity>
+                        </TouchableNativeFeedback>
                     </View>
                 ) : null}
             </TouchableOpacity>

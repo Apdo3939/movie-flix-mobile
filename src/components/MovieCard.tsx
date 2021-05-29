@@ -1,4 +1,4 @@
-import * as React from 'react';
+import  React from 'react';
 import { View, Image, Text, TouchableOpacity, ImageSourcePropType } from 'react-native';
 import { useNavigation } from '@react-navigation/native'
 import { theme, text } from '../styles';
@@ -9,6 +9,8 @@ interface MovieProps {
     title: String;
     subTitle: String;
     year: Number;
+    synopsis: String;
+    genre: Object;
 }
 
 const MovieCard: React.FC<MovieProps> = ({ id, imgUrl, title, year, subTitle }) => {

@@ -19,6 +19,44 @@ export async function getMovies() {
             },
         }
     );
-
     return result;
 }
+
+export async function getMoviesByGenre(id: number) {
+    const authToken = await userToken();
+    const result = api.get(`/movies?genreId=${id}`, {
+      headers: {
+        Authorization: `Bearer ${authToken}`,
+      },
+    });
+    return result;
+  }
+
+  export async function getMoviesById(id: number) {
+    const authToken = await userToken();
+    const result = api.get(`/movies/${id}`, {
+      headers: {
+        Authorization: `Bearer ${authToken}`,
+      },
+    });
+    return result;
+  }
+  
+  export async function saveAvaliation(data: object) {
+    const authToken = await userToken();
+    const result = api.post(`/reviews`, data, {
+      headers: {
+        Authorization: `Bearer ${authToken}`,
+      },
+    });
+    return result;
+  }
+  export async function getGenres() {
+    const authToken = await userToken();
+    const result = api.get(`/genres`, {
+      headers: {
+        Authorization: `Bearer ${authToken}`,
+      },
+    });
+    return result;
+  }
