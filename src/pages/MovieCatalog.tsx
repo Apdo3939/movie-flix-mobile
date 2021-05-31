@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ScrollView, ActivityIndicator, View, Modal, TouchableOpacity, Text} from 'react-native';
+import { ScrollView, ActivityIndicator, View, Modal, TouchableOpacity, Text } from 'react-native';
 import { catalogTheme } from '../styles';
 import { MovieCard } from '../components';
 import { getGenres, getMoviesByGenre } from '../@services';
@@ -26,7 +26,7 @@ const MovieCatalog: React.FC = () => {
         synopsis: null,
         genre: null,
     });
-    
+
 
     async function fillMovies() {
         setLoading(true);
@@ -38,7 +38,6 @@ const MovieCatalog: React.FC = () => {
     async function loadGenres() {
         const response = await getGenres();
         setGenres(response.data);
-        console.warn(response.data);
     }
 
     useEffect(() => {
@@ -50,42 +49,46 @@ const MovieCatalog: React.FC = () => {
     }, [selectedGenre]);
 
     return (
-        <View style={catalogTheme.container}>
+        <View style={catalogTheme.container} >
             <View style={catalogTheme.card}>
-                <Modal style={{ width: '100%' }}
+                <Modal
                     visible={showGenres}
-                    animationType="fade"
+                    animationType='fade'
                     transparent={true}
-                    presentationStyle="overFullScreen"
+                    presentationStyle='overFullScreen'
                 >
-                    <View style={catalogTheme.cardModal}>
-                        <ScrollView>
-                            {genres.map(g => (
-                                <TouchableOpacity
-                                    key={g.id}
-                                    onPress={() => {
-                                        setMovie({ ...movie, genre: g.name });
-                                        setShowGenres(!showGenres);
-                                        setSelectedGenre(g.id);
-                                    }}
-                                >
-                                </TouchableOpacity>
-                            ))}
-                            <View style={{ padding: 10 }}>
-                                <TouchableOpacity
-                                    onPress={() => setShowGenres(!showGenres)}
-                                    style={{ width: 320, height: 50 }}
-                                >
-                                    <Text style={{ color: '#FFF' }}>
-                                        {movie.genre === null ? 'Escolha um Gênero' : movie.genre}
-                                    </Text>
-                                </TouchableOpacity>
-                            </View>
-                        </ScrollView>
+                    <View style={catalogTheme.modalOptions}>
+                        <View style={catalogTheme.modalContent}>
+                            <ScrollView>
+                                {genres.map(gen => (
+                                    <TouchableOpacity
+                                        key={gen.id}
+                                        onPress={() => {
+                                            setMovie({ ...movie, genre: gen.name });
+                                            setShowGenres(!showGenres);
+                                            setSelectedGenre(gen.id);
+                                        }}
+                                        style={catalogTheme.modalOption}
+                                    >
+                                        <Text style={catalogTheme.modalText}>{gen.name}</Text>
+                                    </TouchableOpacity>
+                                ))}
+                            </ScrollView>
+                        </View>
                     </View>
                 </Modal>
 
-                <ScrollView >
+                <View style={catalogTheme.modalContainer}>
+                    <TouchableOpacity
+                        onPress={() => setShowGenres(!showGenres)}
+                        style={catalogTheme.modalContent}
+                    >
+                        <Text style={catalogTheme.modalText}>
+                            {movie.genre === null ? 'Escolha um Gênero' : movie.genre}
+                        </Text>
+                    </TouchableOpacity>
+                </View>
+                <ScrollView>
                     {loading ? (<ActivityIndicator size='large' />) : (
                         movies.map(movie => <MovieCard {...movie} key={movie.id} />)
                     )}
