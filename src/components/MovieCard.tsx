@@ -25,7 +25,7 @@ const MovieCard: React.FC<MovieProps> = ({ id, imgUrl, title, year, subTitle }) 
             </View>
             <TouchableOpacity
                 style={theme.secondaryButton}
-                onPress={() => navigation.navigate('MovieDetails')}>
+                onPress={() => navigation.navigate('MovieDetails', {id})}>
                 <Text style={text.secondaryText}>VER DETALHES</Text>
             </TouchableOpacity>
         </View>

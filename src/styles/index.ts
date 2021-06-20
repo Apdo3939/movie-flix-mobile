@@ -310,7 +310,7 @@ const catalogTheme = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        justifyContent:'center',
+        justifyContent: 'center',
         padding: 20,
         backgroundColor: colors.mediumGray,
     },
@@ -321,7 +321,7 @@ const catalogTheme = StyleSheet.create({
         borderRadius: 20,
         paddingVertical: 10,
         alignItems: 'center',
-        justifyContent: 'center' 
+        justifyContent: 'center'
     },
 
     modalContainer: {
@@ -371,24 +371,23 @@ const details = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: colors.secondary,
-        padding: 20,
+        padding: 10,
+    },
+    content: {
+        width: '100%',
+        height: '100%',
+        borderRadius: 20,
+        paddingVertical: 10,
     },
     card: {
         width: "100%",
-        height: "100%",
-        padding: 20,
         borderRadius: 20,
-        shadowColor: colors.primary,
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
+        alignContent: 'center',
+        alignItems: 'center',
+        marginBottom: 10,
     },
 
     textButton: {
-
         fontSize: 20,
         fontWeight: '400',
         color: colors.lightGray,
@@ -397,7 +396,7 @@ const details = StyleSheet.create({
     },
 
     primaryButton: {
-        width: "100%",
+        width: 360,
         height: 50,
         borderRadius: 10,
         borderWidth: 2,
@@ -405,6 +404,88 @@ const details = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: colors.secondary,
+    },
+
+    cardMovie: {
+        width: "100%",
+        paddingVertical: 20,
+        borderRadius: 20,
+        borderWidth: 2,
+        borderColor: colors.lightGray,
+        backgroundColor: colors.mediumGray,
+    },
+
+    titleText: {
+        fontSize: 20,
+        fontWeight: '700',
+        color: colors.primary,
+        paddingLeft: 20,
+        marginBottom: 10,
+    },
+
+    imgDraw: {
+        width: 360,
+        height: 200,
+        marginVertical: 10,
+    },
+
+    yearText: {
+        fontSize: 20,
+        fontWeight: '700',
+        color: colors.primary,
+        paddingLeft: 20,
+    },
+
+    subTitleText: {
+        fontSize: 14,
+        fontWeight: '400',
+        color: colors.lightGray,
+        paddingLeft: 20,
+        marginBottom: 10,
+    },
+
+    synopsesContent: {
+        width: 320,
+        marginLeft: 20,
+        padding: 10,
+        borderWidth: 2,
+        borderColor: colors.lightGray,
+        borderRadius: 10,
+    },
+
+    synopsesText: {
+        color: colors.lightGray,
+        textAlign: 'justify',
+    },
+
+    cardSaveAvaliables:{
+        width: '100%',
+        borderWidth: 2,
+        borderColor: colors.lightGray,
+        borderRadius: 20,
+        marginVertical: 10,
+        padding: 20,
+    },
+
+    inputText:{
+        width: '100%',
+        height: 100,
+        backgroundColor: colors.lightGray,
+        borderRadius: 10,
+        marginBottom: 20,
+        paddingHorizontal: 10,
+    },
+
+    saveButton: {
+        width: '100%',
+        height: 50,
+        borderRadius: 10,
+        borderWidth: 2,
+        borderColor: colors.lightGray,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: colors.primary,
+
     },
 })
 
