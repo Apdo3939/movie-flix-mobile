@@ -447,10 +447,13 @@ const details = StyleSheet.create({
     synopsesContent: {
         width: 320,
         marginLeft: 20,
-        padding: 10,
+        marginBottom: 10,
+        paddingVertical: 10,
+        paddingLeft: 10,
         borderWidth: 2,
         borderColor: colors.lightGray,
         borderRadius: 10,
+        textAlign: 'left',
     },
 
     synopsesText: {

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, TouchableOpacity, Text, ScrollView, ActivityIndicator, Image, TextInput } from 'react-native';
-import { getMoviesById } from '../@services';
+import { getMoviesById, saveAvaliation } from '../@services';
 import { details } from '../styles';
 import { useNavigation } from '@react-navigation/native';
 
@@ -9,7 +9,6 @@ const MovieDetails = ({ route: { params: { id } } }) => {
 
     const navigation = useNavigation();
     const [loading, setLoading] = useState(false);
-    const [userFetchData, setUserFetchData] = useState({});
     const [movie, setMovie] = useState({
         id: 0,
         title: null,
@@ -30,11 +29,22 @@ const MovieDetails = ({ route: { params: { id } } }) => {
             },
         ],
     });
-
     const [userAvaliation, setUserAvaliation] = useState({
-        movieId: 0,
+        movieId: id,
         text: '',
     });
+
+    function handleSave() {
+        saveAvaliable();
+        navigation.goBack();
+    }
+
+    async function saveAvaliable() {
+        setLoading(true);
+        const res = await saveAvaliation(userAvaliation);
+        setUserAvaliation(res.data);
+        setLoading(false);
+    }
 
     async function loadMovieData() {
         setLoading(true);
@@ -43,7 +53,10 @@ const MovieDetails = ({ route: { params: { id } } }) => {
         setLoading(false);
     }
 
-    useEffect(() => { loadMovieData() }, []);
+    useEffect(() => {
+        loadMovieData();
+    }, []);
+
 
     return (
         <View style={details.container}>
@@ -86,7 +99,7 @@ const MovieDetails = ({ route: { params: { id } } }) => {
                             </TextInput>
                             <TouchableOpacity
                                 style={details.saveButton}
-                                onPress={(() => navigation.goBack())}>
+                                onPress={(() => handleSave())}>
                                 <Text style={details.textButton}>
                                     SALVAR AVALIAÇÃO
                                 </Text>

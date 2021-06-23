@@ -44,13 +44,14 @@ export async function getMoviesByGenre(id: number) {
   
   export async function saveAvaliation(data: object) {
     const authToken = await userToken();
-    const result = api.post(`/reviews`, data, {
+    const result = api.post(`/reviews?direction=ASC&orderBy=id`, data, {
       headers: {
         Authorization: `Bearer ${authToken}`,
       },
     });
     return result;
   }
+  
   export async function getGenres() {
     const authToken = await userToken();
     const result = api.get(`/genres`, {
