@@ -408,6 +408,7 @@ const details = StyleSheet.create({
 
     cardMovie: {
         width: "100%",
+        marginTop: 10,
         paddingVertical: 20,
         borderRadius: 20,
         borderWidth: 2,
@@ -448,8 +449,7 @@ const details = StyleSheet.create({
         width: 320,
         marginLeft: 20,
         marginBottom: 10,
-        paddingVertical: 10,
-        paddingLeft: 10,
+        padding: 10,
         borderWidth: 2,
         borderColor: colors.lightGray,
         borderRadius: 10,

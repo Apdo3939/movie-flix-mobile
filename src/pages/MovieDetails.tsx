@@ -3,8 +3,14 @@ import { View, TouchableOpacity, Text, ScrollView, ActivityIndicator, Image, Tex
 import { getMoviesById, saveAvaliation } from '../@services';
 import { details } from '../styles';
 import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import jwt_decode from 'jwt-decode';
 
+type decode = {
+    authorities: []
+}
 
+//como consertar este erro do id?
 const MovieDetails = ({ route: { params: { id } } }) => {
 
     const navigation = useNavigation();
@@ -14,7 +20,7 @@ const MovieDetails = ({ route: { params: { id } } }) => {
         title: null,
         subTitle: null,
         year: null,
-        imgUrl: null,
+        imgUrl: '',
         synopsis: null,
         reviews: [
             {
@@ -24,6 +30,12 @@ const MovieDetails = ({ route: { params: { id } } }) => {
                     {
                         id: null,
                         name: null,
+                        roles: [
+                            {
+                                id: null,
+                                authority: null,
+                            }
+                        ],
                     },
                 ],
             },
@@ -34,16 +46,32 @@ const MovieDetails = ({ route: { params: { id } } }) => {
         text: '',
     });
 
+    const [role, setRole] = useState('');
+
+    async function getAuthoty() {
+        const token = await AsyncStorage.getItem('@token');
+
+        if (token !== undefined) {
+            let decode: decode = jwt_decode(String(token)) || [];
+            let { authorities } = decode;
+            authorities.map((auth) => {
+                setRole(auth);
+            });
+        }
+    }
+
     function handleSave() {
         saveAvaliable();
-        navigation.goBack();
     }
 
     async function saveAvaliable() {
         setLoading(true);
-        const res = await saveAvaliation(userAvaliation);
-        setUserAvaliation(res.data);
-        setLoading(false);
+        await saveAvaliation(userAvaliation);
+        loadMovieData();
+        setUserAvaliation({
+            movieId: id,
+            text: '',
+        });
     }
 
     async function loadMovieData() {
@@ -54,9 +82,9 @@ const MovieDetails = ({ route: { params: { id } } }) => {
     }
 
     useEffect(() => {
+        getAuthoty();
         loadMovieData();
-    }, []);
-
+    }, [])
 
     return (
         <View style={details.container}>
@@ -84,37 +112,39 @@ const MovieDetails = ({ route: { params: { id } } }) => {
                                 </Text>
                             </View>
                         </View>
-
-                        <View style={details.cardSaveAvaliables}>
-                            <TextInput
-                                placeholder="Deixe sua avaliação aqui"
-                                multiline={true}
-                                value={userAvaliation.text}
-                                onChangeText={e => {
-                                    const newUserAvaliation = { ...userAvaliation };
-                                    newUserAvaliation.text = e;
-                                    setUserAvaliation(newUserAvaliation);
-                                }}
-                                style={details.inputText}>
-                            </TextInput>
-                            <TouchableOpacity
-                                style={details.saveButton}
-                                onPress={(() => handleSave())}>
-                                <Text style={details.textButton}>
-                                    SALVAR AVALIAÇÃO
-                                </Text>
-                            </TouchableOpacity>
-                        </View>
-
-                        <View style={details.cardMovie}>
-                            <Text style={details.titleText}>Avaliações</Text>
-                            {movie.reviews.map(review => (
-                                <View style={details.synopsesContent} key={review.id}>
-                                    <Text >{review.user.name}</Text>
-                                    <Text style={details.synopsesText}>{review.text}</Text>
+                        {role === "ROLE_MEMBER" && 
+                            <>
+                                <View style={details.cardSaveAvaliables}>
+                                    <TextInput
+                                        placeholder="Deixe sua avaliação aqui"
+                                        multiline={true}
+                                        value={userAvaliation.text}
+                                        onChangeText={e => {
+                                            const newUserAvaliation = { ...userAvaliation };
+                                            newUserAvaliation.text = e;
+                                            setUserAvaliation(newUserAvaliation);
+                                        }}
+                                        style={details.inputText}>
+                                    </TextInput>
+                                    <TouchableOpacity
+                                        style={details.saveButton}
+                                        onPress={(() => handleSave())}>
+                                        <Text style={details.textButton}>
+                                            SALVAR AVALIAÇÃO
+                                        </Text>
+                                    </TouchableOpacity>
                                 </View>
-                            ))}
-                        </View>
+                            </>
+                        }
+                        <View style={details.cardMovie}>
+                                    <Text style={details.titleText}>Avaliações</Text>
+                                    {movie.reviews.map(newReview => (
+                                        <View style={details.synopsesContent} key={newReview.id}>
+                                            <Text >{newReview.user.name}</Text>
+                                            <Text style={details.synopsesText}>{newReview.text}</Text>
+                                        </View>
+                                    ))}
+                                </View>
                     </ScrollView>
                 </ScrollView>
             )}
